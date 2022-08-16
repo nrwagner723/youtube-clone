@@ -10,9 +10,9 @@ from .serializers import CommentSerializer
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_comment_by_id(request, pk):
-    comment = get_object_or_404(Comment, pk=pk)
-    serializer = CommentSerializer(comment, many=True)
+def get_comment_by_id(request, video_id):
+    comments = Comment.objects.filter(video_id = video_id)
+    serializer = CommentSerializer(comments, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
