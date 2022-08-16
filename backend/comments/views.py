@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -9,9 +10,9 @@ from .serializers import CommentSerializer
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_comment_by_id(request):
-    comments = Comment.objects.filter(video_id=request.video_id.id)
-    serializer = CommentSerializer(comments, many=True)
+def get_comment_by_id(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    serializer = CommentSerializer(comment, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
