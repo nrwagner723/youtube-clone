@@ -14,10 +14,10 @@ const HomePage = () => {
   useEffect(() => {
     const fetchComments = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:8000/api/comments/7/", {
-          // headers: {
-          //   Authorization: "Bearer " + token,
-          // },
+        let response = await axios.get("http://127.0.0.1:000/api/comments/7/", {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
         });
         setComments(response.data);
       } catch (error) {
@@ -32,7 +32,7 @@ const HomePage = () => {
       {comments &&
         comments.map((comment) => (
           <p key={comment.id}> 
-            {/* {car.year} {car.model} {car.make} */}
+            {comment.text} {comment.likes} {comment.dislikes}
           </p>
         ))}
     </div>
